@@ -16,9 +16,9 @@ namespace Morse_Code
             }
         }
 
-        static void ConvertToMorse (string input)
+        static void ConvertToMorse(string input)
         {
-            
+
         }
 
         static void Main(string[] args)
@@ -39,22 +39,23 @@ namespace Morse_Code
             while (isRunning)
             {
                 ///Prompt User for action
-                Console.WriteLine("What would you like to do? (display) (translate)");
+                Console.WriteLine("What would you like to do? (display) (translate) (stop)");
                 var command = Console.ReadLine();
                 if (command == "display")
                 {
                     ///Display MorseCodex
                     PrintMorseCodex(morseCodex);
-                } else if (command == "translate")
+                }
+                else if (command == "translate")
                 {
                     ///Translate a phrase:
-                    
+
                     ///prompt user for accepted characters
                     Console.WriteLine("Enter the phrase you would like to translate. Acceptable characters include A-Z and 0-9.");
 
                     string input = Console.ReadLine().ToUpper();
                     Console.WriteLine($"Translating {input}.");
-                    
+
                     /// - compare to MorseCodex
                     var phrase = input.ToCharArray();
                     Console.WriteLine($"{phrase}");
@@ -66,14 +67,16 @@ namespace Morse_Code
                         {
                             morseOutput = morseOutput + (morseCodex[poop].ToString());
                             Console.WriteLine($"{morseOutput}");
-                        } else {
+                        }
+                        else
+                        {
                             Console.WriteLine("Your phrase did not work, please try another phrase.");
                         }
                     }
-                    /// - store as output (build a string as we go)
-                    ///Display converted text
-                    /// - display output as string
-
+                }
+                else if (command == "stop")
+                {
+                    isRunning = false;
                 }
                 /// Offer to translate another string
             }
