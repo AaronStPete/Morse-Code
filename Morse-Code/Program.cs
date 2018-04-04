@@ -6,7 +6,7 @@ namespace Morse_Code
 {
     class Program
     {
-        static void PrintMorseCodex(Dictionary<string, string> morseCodex)
+        static void PrintMorseCodex(Dictionary<char, string> morseCodex)
         {
             Console.WriteLine("Printing the Morse Codex");
             Console.WriteLine("------------------------");
@@ -16,16 +16,22 @@ namespace Morse_Code
             }
         }
 
+        static void ConvertToMorse (string input)
+        {
+            
+        }
+
         static void Main(string[] args)
         {
-            var morseCodex = new Dictionary<string, string>();
+            ///build dictionary
+            var morseCodex = new Dictionary<char, string>();
             const string FILE_PATH = "../../../../morse.csv";
             using (var reader = new StreamReader(FILE_PATH))
             {
                 while (reader.Peek() > -1)
                 {
                     var line = reader.ReadLine().Split(',');
-                    morseCodex.Add(line[0], line[1]);
+                    morseCodex.Add(Convert.ToChar(line[0]), line[1]);
                 }
             }
 
@@ -33,20 +39,42 @@ namespace Morse_Code
             while (isRunning)
             {
                 ///Prompt User for action
-                Console.WriteLine("What would you like to do? (display)");
+                Console.WriteLine("What would you like to do? (display) (translate)");
                 var command = Console.ReadLine();
                 if (command == "display")
                 {
                     ///Display MorseCodex
                     PrintMorseCodex(morseCodex);
+                } else if (command == "translate")
+                {
+                    ///Translate a phrase:
+                    
+                    ///prompt user for accepted characters
+                    Console.WriteLine("Enter the phrase you would like to translate. Acceptable characters include A-Z and 0-9.");
+
+                    string input = Console.ReadLine().ToUpper();
+                    Console.WriteLine($"Translating {input}.");
+                    
+                    /// - compare to MorseCodex
+                    var phrase = input.ToCharArray();
+                    Console.WriteLine($"{phrase}");
+                    var morseOutput = "";
+                    Console.WriteLine($"{morseOutput}");
+                    foreach (var poop in phrase)
+                    {
+                        if (morseCodex.ContainsKey(poop))
+                        {
+                            morseOutput = morseOutput + (morseCodex[poop].ToString());
+                            Console.WriteLine($"{morseOutput}");
+                        } else {
+                            Console.WriteLine("Your phrase did not work, please try another phrase.");
+                        }
+                    }
+                    /// - store as output (build a string as we go)
+                    ///Display converted text
+                    /// - display output as string
+
                 }
-                ///prompt user for accepted characters
-                /// - let string input = Console.ReadLine()
-                ///Translate a phrase
-                /// - compare to MorseCodex
-                /// - store as output
-                ///Display converted text
-                /// - display output as string
                 /// Offer to translate another string
             }
         }
