@@ -35,8 +35,11 @@ namespace Morse_Code
                 ///Prompt User for action
                 Console.WriteLine("What would you like to do? (display)");
                 var command = Console.ReadLine();
-                ///Display MorseCodex
-                /// - PrintMorseCodex()
+                if (command == "display")
+                {
+                    ///Display MorseCodex
+                    PrintMorseCodex(morseCodex);
+                }
                 ///prompt user for accepted characters
                 /// - let string input = Console.ReadLine()
                 ///Translate a phrase
